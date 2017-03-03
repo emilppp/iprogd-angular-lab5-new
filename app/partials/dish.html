@@ -39,7 +39,8 @@ Instructions, Ingredients and total cost. -->
       <div class="row">
         <div class="col-md-7">
           <h1>Preparation</h1>
-          <p id="preparationParagraph" ng-bind-html="dish.instructions"></p>
+          <p id="preparationParagraph">{{ dish.instructions }}
+          </p>
         </div>
       </div>
     </div>

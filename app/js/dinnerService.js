@@ -11,11 +11,6 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   var numberOfGuests = 1;
 
 
-
-  this.getNumberOfGuests = function () {
-    return numberOfGuests;
-  }
-
   this.incNumberOfGuests = function () {
     numberOfGuests++;
   }
@@ -70,17 +65,25 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function () {
     var ingredients = this.getAllIngredients();
-    var sum = 0.;
+    var guests = this.getNumberOfGuests();
+    var sum = 0;
     for (key in ingredients) {
-      sum += parseFloat(ingredients[key].amount) * this.getNumberOfGuests();
+      sum += parseFloat(ingredients[key].amount);
     }
-    return sum;
+    return sum * guests;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function (dish, type) {
-    menu[dish.type] = dish;
+    console.log(menu[type]);
+    console.log(dish);  
+    if(menu[type] != null) {
+      delete menu[type];
+    }
+    menu[type] = dish;
+
+    console.log(this.getFullMenu());
   }
 
   //Removes dish from menu
@@ -106,38 +109,38 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
   //if you don't pass any filter all the dishes will be returned
- /* this.getAllDishes = function (type, filter, cb, cbError) {
-    $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' + filter + '&type=' + type,
-      headers: {
-        'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
-      },
-      success: function (data) {
-        cb(data.results)
-      },
-      error: function (data) {
-        cbError(data)
-      }
-    })
-  }
-
-  //function that returns a dish of specific ID
-  this.getDish = function (id, type, cb, cbError) {
-    $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/information',
-      headers: {
-        'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
-      },
-      success: function (data) {
-        data.type = type;
-        cb(data)
-      },
-      error: function (data) {
-        cbError(data)
-      }
-    })
-  }
-*/
+  /* this.getAllDishes = function (type, filter, cb, cbError) {
+     $.ajax({
+       url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?query=' + filter + '&type=' + type,
+       headers: {
+         'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+       },
+       success: function (data) {
+         cb(data.results)
+       },
+       error: function (data) {
+         cbError(data)
+       }
+     })
+   }
+ 
+   //function that returns a dish of specific ID
+   this.getDish = function (id, type, cb, cbError) {
+     $.ajax({
+       url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/information',
+       headers: {
+         'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+       },
+       success: function (data) {
+         data.type = type;
+         cb(data)
+       },
+       error: function (data) {
+         cbError(data)
+       }
+     })
+   }
+ */
   //function that returns a price of dish given by ID
   this.getDishPrice = function (dish) {
     var ingredients = dish.extendedIngredients;

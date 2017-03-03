@@ -14,8 +14,8 @@ not support it in free version) and list all the dishes that match the search. -
         <div class="row">
             <div class="col-md-5">
                 <div class="form-inline">
-                    <input type="text" class="form-control" id="searchField" placeholder="Enter keywords" ng-model="query" ng-change="search(query, type)"></input>
-                    <button id="searchButton" class="btn btn-primary">
+                    <input type="text" class="form-control" id="searchField" placeholder="Enter keywords" ng-model="query"></input>
+                    <button id="searchButton" class="btn btn-primary" ng-click="search(query, searchType)">
                   <span class="glyphicon glyphicon-search"></span> 
                   Search
                 </button>
@@ -23,7 +23,7 @@ not support it in free version) and list all the dishes that match the search. -
             </div>
 
             <div class="col-md-2">
-                <select class="form-control" ng-model="searchType" ng-change="search(query, searchType)">
+                <select class="form-control" ng-model="searchType">
   <option value="appetizer">Starter</option>
   <option value="main course">Main</option>
   <option value="dessert">Dessert</option>
@@ -37,7 +37,7 @@ not support it in free version) and list all the dishes that match the search. -
         </div>
 
         <div class="row" id="searchResults">
-            <a ng-repeat="dish in dishes" class="col-md-2" style="cursor:pointer" ng-href="#!/dish/{{ dish.id }}">
+            <a ng-repeat="dish in dishes" class="col-md-2" style="cursor:pointer" ng-href="#!/dish/{{searchType}}/{{ dish.id }}">
                 <img ng-src="{{ 'https://spoonacular.com/recipeImages/' + dish.image }}" class="img-responsive img-thumbnail" />
                 <p class="center-label grey">
                     {{ dish.title }}

@@ -9,9 +9,12 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
 
   //Variables used in the model
   $scope.dish = {};
-
   $scope.status = "";
+  $scope.dishType = "";
 
+  var dishParam = $routeParams.searchType;
+
+  
 
   $scope.getDishCost = function (dish) {
     return Dinner.getDishPrice(dish);
@@ -25,19 +28,23 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
     return Dinner.getNumberOfGuests();
   }
 
-  var init = function () {
+  $scope.addDishAndReturn = function () {
+    console.log($scope.dish);
+    console.log(dishParam);
+    Dinner.addDishToMenu($scope.dish, dishParam);
+  }
+
+  
     var res = Dinner.Dish.get({ id: $routeParams.dishId });
 
     res.$promise.then(function (greeting) {
       console.log(greeting);
       $scope.dish = greeting;
-      $scope.status = "showing " + greeting.title; 
+      $scope.status = "showing " + greeting.title;
 
 
     }, function (reason) {
       $scope.status = "Error";
     });
-  }
 
-  init();
-});
+})
