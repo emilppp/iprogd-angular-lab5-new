@@ -9,8 +9,10 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope, Dinner) {
   $scope.status = "";
 
 
+
   $scope.search = function (query, type) {
     $scope.status = "Searching...";
+    console.log(type);
     Dinner.DishSearch.get({ query: query, type: type }, function (data) {
       $scope.dishes = data.results;
       $scope.status = "Showing " + data.results.length + " results";
@@ -18,4 +20,5 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope, Dinner) {
       $scope.status = "There was an error";
     });
   }
+
 });

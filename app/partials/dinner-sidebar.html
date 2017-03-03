@@ -4,7 +4,7 @@
     <h3>My dinner</h3>
     <div ng-model="name">
         <!--Number of guests: <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/> -->
-        Number of guests: {{ getNumberOfGuests()}}
+        Number of guests: {{ getNumberOfGuests() }}
     </div>
     <div>
         <button id="minusGuest" class="btn" ng-click="decNumberOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>
@@ -20,7 +20,7 @@
     </table>
     <hr>
     <h4 class="text-primary text-center">
-        Total price: <span id="totalPrice"></span> SEK
+        Total price: {{ getTotalMenuCost() }} SEK
     </h4>
     <a type="button" id="confirmDinnerButton" class="btn btn-block btn-primary" ng-href="">
         <span class="glyphicon glyphicon-ok"></span> Confirm dinner

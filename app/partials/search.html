@@ -23,11 +23,11 @@ not support it in free version) and list all the dishes that match the search. -
             </div>
 
             <div class="col-md-2">
-                <select class="form-control" ng-model="type" name="dishType" ng-change="search(query, type)">
+                <select class="form-control" ng-model="searchType" ng-change="search(query, searchType)">
   <option value="appetizer">Starter</option>
   <option value="main course">Main</option>
   <option value="dessert">Dessert</option>
-</select>
+                </select>
             </div>
         </div>
     </div>
@@ -50,4 +50,4 @@ not support it in free version) and list all the dishes that match the search. -
         </div>
     </div>
 </div>
-<!-- SearchView end--
+<!-- SearchView end -->
