@@ -1,0 +1,53 @@
+<!-- We include the sidebar as it is shared across two screens. -->
+<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+
+<!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
+not support it in free version) and list all the dishes that match the search. -->
+
+
+
+
+<div id="searchView" class="no-display">
+    <div class="col-md-10 search-bar bg-info">
+        <h2>Select dish</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-inline">
+                    <input type="text" class="form-control" id="searchField" placeholder="Enter keywords" ng-model="query" ng-change="search(query, type)"></input>
+                    <button id="searchButton" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-search"></span> 
+                  Search
+                </button>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-control" ng-model="type" name="dishType" ng-change="search(query, type)">
+  <option value="appetizer">Starter</option>
+  <option value="main course">Main</option>
+  <option value="dessert">Dessert</option>
+</select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 search-results-container">
+        <div id="status" class="">
+            {{status}}
+        </div>
+
+        <div class="row" id="searchResults">
+            <a ng-repeat="dish in dishes" class="col-md-2" style="cursor:pointer" ng-href="#!/dish/{{ dish.id }}">
+                <img ng-src="{{ 'https://spoonacular.com/recipeImages/' + dish.image }}" class="img-responsive img-thumbnail" />
+                <p class="center-label grey">
+                    {{ dish.title }}
+                </p>
+                <p>
+                    {{ 'Ready in ' + dish.readyInMinutes + ' minutes' }}
+                </p>
+            </a>
+            <!-- DYNAMIC CONTENT GOES HERE -->
+        </div>
+    </div>
+</div>
+<!-- SearchView end--

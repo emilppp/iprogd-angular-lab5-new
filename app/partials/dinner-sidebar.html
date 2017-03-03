@@ -1,0 +1,29 @@
+<!-- TODO in Lab 5: Display the items on the menu with cost for each -->
+<!-- SideBarView -->
+<div id="sideBarView" class="col-md-2">
+    <h3>My dinner</h3>
+    <div ng-model="name">
+        <!--Number of guests: <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/> -->
+        Number of guests: {{ getNumberOfGuests()}}
+    </div>
+    <div>
+        <button id="minusGuest" class="btn" ng-click="decNumberOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>
+        <button id="plusGuest" class="btn" ng-click="incNumberOfGuests()"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+    <br>
+    <table id="sideMenuTable" class="table">
+        <tr ng-repeat="">
+            <th></th>
+            <th></th>
+            <th><button class="btn bth-xs btn-danger" ng-click="">X</button></th>
+        </tr>
+    </table>
+    <hr>
+    <h4 class="text-primary text-center">
+        Total price: <span id="totalPrice"></span> SEK
+    </h4>
+    <a type="button" id="confirmDinnerButton" class="btn btn-block btn-primary" ng-href="">
+        <span class="glyphicon glyphicon-ok"></span> Confirm dinner
+    </a>
+    <br>
+</div>
