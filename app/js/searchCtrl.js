@@ -20,10 +20,6 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope, Dinner) {
     });
   }
 
-   $scope.getTotalMenuCost = function() {
-    return Dinner.getTotalMenuPrice();
-  }
-
 
 
 });

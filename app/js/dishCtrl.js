@@ -10,21 +10,14 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
   //Variables used in the model
   $scope.dish = {};
   $scope.status = "";
-  $scope.dishType = "";
 
   var dishParam = $routeParams.searchType;
-
-  
 
   $scope.getDishCost = function (dish) {
     return Dinner.getDishPrice(dish);
   }
 
-  $scope.getTotalMenuCost = function () {
-    return Dinner.getTotalMenuPrice();
-  }
-
-  $scope.numberOfGuests = function () {
+  $scope.numberOfGuestsz = function () {
     return Dinner.getNumberOfGuests();
   }
 

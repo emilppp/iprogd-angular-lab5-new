@@ -19,18 +19,18 @@ Instructions, Ingredients and total cost. -->
           <button id="backButton" class="btn btn-primary" onclick="history.back()"><span class="glyphicon glyphicon-chevron-left"></span>Back to search</button>
         </div>
         <div class="col-md-7 grid-border bg-warning">
-          <h2>Ingredients for <span id="tableTitle">{{numberOfGuests()}}</span> people:</h2>
+          <h2>Ingredients for <span id="tableTitle">{{numberOfGuestsz()}}</span> people:</h2>
           <table class="table" id="ingredientsTable">
             <!-- DYNAMIC CONTENT HERE -->
             <tr ng-repeat="ingredient in dish.extendedIngredients">
-              <td>{{ingredient.amount * numberOfGuests()}} {{ingredient.unit}}</td>
+              <td>{{ingredient.amount * numberOfGuestsz()}} {{ingredient.unit}}</td>
               <td>{{ingredient.name}}</td>
               <td>SEK</td>
-              <td>{{ingredient.amount * numberOfGuests()}}</td>
+              <td>{{ingredient.amount * numberOfGuestsz()}}</td>
             </tr>
           </table>
           <hr>
-          <h4>{{getDishCost(dish) * numberOfGuests()}} SEK <span id="dishCost"></span></h4>
+          <h4><span id="dishCost" ng-if="dish.extendedIngredients != undefined">{{getDishCost(dish) * numberOfGuestsz()}} SEK </span></h4>
           <button class="btn btn-primary" id="confirmDishButton" ng-click="addDishAndReturn()"><span class="glyphicon glyphicon-ok"></span> Confirm dish</button>
           <br>
           <br>

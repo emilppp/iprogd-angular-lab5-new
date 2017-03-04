@@ -16,7 +16,9 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   }
 
   this.decNumberOfGuests = function () {
-    numberOfGuests--;
+    if(numberOfGuests > 1) {
+      numberOfGuests--;
+    }
   }
 
   //DinnerModel Object constructor
@@ -65,25 +67,19 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function () {
     var ingredients = this.getAllIngredients();
-    var guests = this.getNumberOfGuests();
     var sum = 0;
     for (key in ingredients) {
       sum += parseFloat(ingredients[key].amount);
     }
-    return sum * guests;
+    return sum * numberOfGuests;
   }
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function (dish, type) {
-    console.log(menu[type]);
-    console.log(dish);  
-    if(menu[type] != null) {
-      delete menu[type];
-    }
-    menu[type] = dish;
-
-    console.log(this.getFullMenu());
+      dish.type = type;
+      menu[type] = dish;
+      console.log(this.getFullMenu());
   }
 
   //Removes dish from menu
