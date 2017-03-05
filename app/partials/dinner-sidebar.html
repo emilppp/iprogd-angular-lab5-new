@@ -17,14 +17,14 @@
         <tr ng-repeat="dish in getFullMenu()">
             <th> {{dish.title}}</th>
             <th> {{getPrice(dish) * getNumberOfGuests()}}</th>
-            <th><button class="btn bth-xs btn-danger" ng-click="removeDish(dish)">X</button></th>
+            <th><button class="btn bth-xs" ng-click="removeDish(dish)">X</button></th>
         </tr>
     </table>
     <hr>
     <h4 class="text-primary text-center">
         Total price: {{ getTotalMenuCost() }} SEK
     </h4>
-    <a type="button" id="confirmDinnerButton" class="btn btn-block btn-primary" ng-href="">
+    <a type="button" id="confirmDinnerButton" class="btn btn-block btn-primary" ng-href="#!/overview">
         <span class="glyphicon glyphicon-ok"></span> Confirm dinner
     </a>
     <br>

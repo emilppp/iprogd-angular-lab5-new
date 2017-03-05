@@ -8,7 +8,7 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
 
 
   //Variables used in the model
-  $scope.dish = {};
+  var dish;
   $scope.status = "";
 
   var dishParam = $routeParams.searchType;
@@ -22,6 +22,7 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
   }
 
   $scope.addDishAndReturn = function () {
+    if (!dish) return;
     console.log($scope.dish);
     console.log(dishParam);
     Dinner.addDishToMenu($scope.dish, dishParam);
@@ -33,6 +34,7 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope, $routeParams, Dinner) 
     res.$promise.then(function (greeting) {
       console.log(greeting);
       $scope.dish = greeting;
+      dish = greeting;
       $scope.status = "showing " + greeting.title;
 
 

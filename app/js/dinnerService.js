@@ -3,7 +3,7 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner', function ($resource) {
+dinnerPlannerApp.factory('Dinner', function ($resource, $cookies, $localStorage) {
 
 
 
@@ -11,12 +11,20 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   var numberOfGuests = 1;
 
 
+
+  if ($localStorage.appetizer) menu['appetizer'] = $localStorage.appetizer;
+  if ($localStorage.maincourse) menu['main course'] = $localStorage.maincourse;
+  if ($localStorage.dessert) menu['dessert'] = $localStorage.dessert;
+
+  if ($cookies.get('guests'))
+    numberOfGuests = $cookies.get('guests');
+
   this.incNumberOfGuests = function () {
     numberOfGuests++;
   }
 
   this.decNumberOfGuests = function () {
-    if(numberOfGuests > 1) {
+    if (numberOfGuests > 1) {
       numberOfGuests--;
     }
   }
@@ -25,6 +33,8 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   this.setNumberOfGuests = function (num) {
     if (num > 0) {
       numberOfGuests = parseInt(num);
+      $cookies.put('guests', numberOfGuests);
+      $localStorage.guests = numberOfGuests;
     }
   }
 
@@ -53,7 +63,7 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
     for (dishKey in menu) {
       var dish = menu[dishKey];
       for (ingKey in dish.extendedIngredients) {
-        var ingredient = dish.extendedIngredients[ingKey];
+        var ingredient = angular.copy(dish.extendedIngredients[ingKey]);
         if (ingredients[ingredient.id] !== undefined) {
           ingredients[ingredient.id].amount += ingredient.amount;
         } else {
@@ -77,14 +87,24 @@ dinnerPlannerApp.factory('Dinner', function ($resource) {
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function (dish, type) {
-      dish.type = type;
-      menu[type] = dish;
-      console.log(this.getFullMenu());
+    dish.type = type;
+    menu[type] = dish;
+    console.log(this.getFullMenu());
+
+    if (type === 'appetizer') $localStorage.appetizer = dish;
+    if (type === 'main course') $localStorage.maincourse = dish;
+    if (type === 'dessert') $localStorage.dessert = dish;
+
+
   }
 
   //Removes dish from menu
   this.removeDishFromMenu = function (dish) {
     delete menu[dish.type];
+
+    if (dish.type === 'appetizer') $localStorage.appetizer = null;
+    if (dish.type === 'main course') $localStorage.maincourse = null;
+    if (dish.type === 'dessert') $localStorage.dessert = null;
   }
 
   this.DishSearch = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search', {}, {
