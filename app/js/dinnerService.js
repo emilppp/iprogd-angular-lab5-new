@@ -3,7 +3,7 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner', function ($resource, $cookies, $localStorage) {
+dinnerPlannerApp.factory('Dinner', function ($resource, $cookieStore, $localStorage) {
 
 
 
@@ -15,26 +15,22 @@ dinnerPlannerApp.factory('Dinner', function ($resource, $cookies, $localStorage)
   if ($localStorage.appetizer) menu['appetizer'] = $localStorage.appetizer;
   if ($localStorage.maincourse) menu['main course'] = $localStorage.maincourse;
   if ($localStorage.dessert) menu['dessert'] = $localStorage.dessert;
-
-  if ($cookies.get('guests'))
-    numberOfGuests = $cookies.get('guests');
-
-  this.incNumberOfGuests = function () {
-    numberOfGuests++;
+  if ($cookieStore.get('guests')) {
+    numberOfGuests = $cookieStore.get('guests');
   }
 
-  this.decNumberOfGuests = function () {
-    if (numberOfGuests > 1) {
-      numberOfGuests--;
-    }
-  }
+  // console.log($cookies.get('guests'));
+  //console.log($localStorage.guests); 
+
+
 
   //DinnerModel Object constructor
   this.setNumberOfGuests = function (num) {
     if (num > 0) {
       numberOfGuests = parseInt(num);
-      $cookies.put('guests', numberOfGuests);
+      $cookieStore.put('guests', numberOfGuests);
       $localStorage.guests = numberOfGuests;
+
     }
   }
 

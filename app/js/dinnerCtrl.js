@@ -3,9 +3,10 @@
 dinnerPlannerApp.controller('DinnerCtrl', function ($scope, Dinner) {
 
   // Variables used in the view
-  //$scope.getGuests = Dinner.getNumberOfGuests();
+  // $scope.guests = Dinner.getNumberOfGuests();
+  // $scope.numberOfGuests = Dinner.getNumberOfGuests();
   // Functions the view can call
-  
+
 
   $scope.setNumberOfGuests = function (number) {
     Dinner.setNumberOfGuests(number);
@@ -15,12 +16,12 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope, Dinner) {
     return Dinner.getNumberOfGuests();
   }
 
-  $scope.decNumberOfGuests = function () {
-    Dinner.decNumberOfGuests();
+  $scope.incNumberOfGuests = function () {
+    Dinner.setNumberOfGuests(Dinner.getNumberOfGuests() + 1);
   }
 
-  $scope.incNumberOfGuests = function () {
-    Dinner.incNumberOfGuests();
+  $scope.decNumberOfGuests = function () {
+    Dinner.setNumberOfGuests(Dinner.getNumberOfGuests() - 1);
   }
 
   $scope.getTotalMenuCost = function () {
@@ -31,15 +32,15 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope, Dinner) {
     return Dinner.getFullMenu();
   }
 
-  $scope.getPrice = function(dish) {
+  $scope.getPrice = function (dish) {
     return Dinner.getDishPrice(dish);
   }
 
-  $scope.removeDish = function(dish) {
+  $scope.removeDish = function (dish) {
     Dinner.removeDishFromMenu(dish);
   }
 
-  $scope.getAllIngredients = function() {
+  $scope.getAllIngredients = function () {
     return Dinner.getAllIngredients();
   }
 
